@@ -1,0 +1,7 @@
+Controllers:
+	{name}Controller.php --> {name}Controller
+		- Under directory Application/Controllers
+
+Views
+	-under directory Application/Views/{controllerName} (controller name in lover case)
+	{actionName}.phtml
