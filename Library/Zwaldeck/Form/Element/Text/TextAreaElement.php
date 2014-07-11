@@ -2,7 +2,7 @@
 
 namespace Zwaldeck\Form\Element\Text;
 
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
 
 class TextAreaElement extends AbstractTextElement {
 	

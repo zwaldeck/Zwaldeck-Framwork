@@ -2,7 +2,7 @@
 define('DS' ,DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 
-use Zwaldeck\Exceptoin\Exception404;
+use Zwaldeck\Exception\Exception404;
 
 try {
 	require_once (ROOT.DS.'library/bootstrap.php');

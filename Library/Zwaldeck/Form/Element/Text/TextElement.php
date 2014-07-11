@@ -2,7 +2,8 @@
 
 namespace Zwaldeck\Form\Element\Text;
 
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
+use Zwaldeck\Util\Utils;
 
 class TextElement extends AbstractTextElement {
 	
@@ -86,12 +87,16 @@ class TextElement extends AbstractTextElement {
 		$this->size = $size;
 	}
 
-	/**
-	 * Not implemented yet
-	 * @thorws NotImplementedYet
-	 */
+
 	public function validate() {
-		throw new NotImplementedYet();
+        Utils::vardump($this->validators);
+		foreach($this->validators as $validator) {
+            if($validator->isValid()) {
+                return $validator->getError();
+            }
+        }
+
+        return true;
 	}
 	
 	public function render() {

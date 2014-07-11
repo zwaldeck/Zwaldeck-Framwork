@@ -31,6 +31,8 @@ class IndexController extends Controller {
 	
 	public function indexAction() {
 		$this->set('title', 'Zwaldeck loves you');
+
+
 		
 		$elem = new RadioElement('id', 'name', 'this is the text', false, false, false, false);
 		$elem->addAttribute('attr', 'attr');

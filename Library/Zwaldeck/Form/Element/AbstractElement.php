@@ -328,7 +328,7 @@ abstract class AbstractElement
             throw new \Exception("ValidatorFactory returned NULL");
         }
 
-        $this->validators[$key] = $validator;
+        $this->validators[$key] = $value;
     }
 
     public function removeValidator($key)

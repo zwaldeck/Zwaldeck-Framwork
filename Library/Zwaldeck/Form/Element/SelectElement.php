@@ -2,7 +2,7 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
 use Zwaldeck\Form\Element\Helper\OptGroup;
 use Zwaldeck\Form\Element\Helper\Option;
 class SelectElement extends AbstractElement {

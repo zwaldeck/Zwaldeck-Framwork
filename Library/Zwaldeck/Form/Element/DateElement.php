@@ -2,7 +2,7 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
 class DateElement extends AbstractElement {
 	
 	public function __construct($id) {

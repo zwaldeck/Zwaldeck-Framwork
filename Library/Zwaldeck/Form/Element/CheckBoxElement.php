@@ -2,7 +2,7 @@
 namespace Zwaldeck\Form\Element;
 
 use Zwaldeck\Form\Label;
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
 
 /**
  * @author Wout Schoovaerts

@@ -2,7 +2,7 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exceptoin\NotImplementedYet;
+use Zwaldeck\Exception\NotImplementedYet;
 
 class NumberElement extends AbstractElement {
 	

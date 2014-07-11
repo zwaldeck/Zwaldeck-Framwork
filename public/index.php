@@ -16,7 +16,7 @@ if (strtolower(ENV) == "development") {
     ini_set('display_startup_errors', TRUE);
 }
 
-use Zwaldeck\Exceptoin\Exception404;
+use Zwaldeck\Exception\Exception404;
 
 try {
     require_once(ROOT . DS . 'Library/bootstrap.php');

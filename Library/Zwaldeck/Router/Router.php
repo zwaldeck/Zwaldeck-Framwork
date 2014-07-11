@@ -4,8 +4,8 @@ namespace Zwaldeck\Router;
 
 use Zwaldeck\Http\Response;
 use Zwaldeck\Http\Request;
-use Zwaldeck\Exceptoin\ControllerNotFoundException;
-use Zwaldeck\Exceptoin\ActionNotFoundException;
+use Zwaldeck\Exception\ControllerNotFoundException;
+use Zwaldeck\Exception\ActionNotFoundException;
 
 /**
  * Here happens the dispatch

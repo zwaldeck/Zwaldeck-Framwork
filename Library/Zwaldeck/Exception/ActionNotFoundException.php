@@ -1,6 +1,6 @@
 <?php
 
-namespace Zwaldeck\Exceptoin;
+namespace Zwaldeck\Exception;
 
 /**
  * 
