@@ -27,6 +27,7 @@ class Registry {
 			throw new \InvalidArgumentException('$key must be a valid string');
 		
 		self::$values[$key] = $value;
+
 	}
 	
 	/**

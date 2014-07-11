@@ -102,8 +102,9 @@ class TextElement extends AbstractTextElement {
 		$required = $this->required ? 'required' : '';//
 		$disabled = $this->disabled ? 'disabled' : '';//
 		$readonly = $this->readonly ? 'readonly' : '';//
+        $maxLength = $this->maxlenght == 0 ? "" : "maxlength=\"{$this->maxlenght}\"";
 		
-		return "<input {$type} id=\"{$this->id}\" {$attr} name=\"{$this->name}\" {$required} {$class} {$disabled} value=\"{$this->value}\" {$readonly} maxlength=\"{$this->maxlenght}\" placeholder=\"{$this->placeholder}\" {$size} />";
+		return "<input {$type} id=\"{$this->id}\" {$attr} name=\"{$this->name}\" {$required} {$class} {$disabled} value=\"{$this->value}\" {$readonly} {$maxLength} placeholder=\"{$this->placeholder}\" {$size} />";
 	}
 }
 

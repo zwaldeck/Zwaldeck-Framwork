@@ -2,6 +2,7 @@
 - Form API
 - Session delete function
 - NotImplementedYetException
+- Validators
 
 
 
@@ -9,3 +10,5 @@
 <================== BUG FIXES ==================>
 - Fixed linux white screen off death
 - some typo's
+- fixed that textelement does not render maxlength="0"
+- fixed method renderAtrr and renderClass when the values are empty

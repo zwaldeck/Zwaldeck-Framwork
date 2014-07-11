@@ -18,9 +18,11 @@ class SubmitElement extends AbstractElement{
 		if(!is_bool($disabled)) {
 			throw new \InvalidArgumentException('$disabled must be true or false');
 		}
-		
+
+
 		$this->value = $value;
 		$this->disabled = $disabled;
+
 	}
 	
 	
@@ -28,7 +30,8 @@ class SubmitElement extends AbstractElement{
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';
-		return "<input type=\"submit\" id=\"{$this->id}\" name=\"{$this->name}\" {$attr} {$class} value=\"{$this->value}\"{$disabled} />";		
+        var_dump($class);
+		return "<input type=\"submit\" id=\"{$this->id}\" name=\"{$this->name}\"  {$attr} {$class} value=\"{$this->value}\"{$disabled} />";
 	}
 
 	public function validate() {

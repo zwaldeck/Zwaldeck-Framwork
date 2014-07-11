@@ -476,12 +476,28 @@ class Form {
 		$form .= "</form>";
 		return $form;
 	}
-	
-	/**
-	 * Renders the custom attributes
-	 * @return string
-	 */
-	protected function renderAttr(array $attrArray) {
+
+
+    public function isValid() {
+        if($this->elements == null) {
+            return true;
+        }
+
+        foreach($this->elements as $elem) {
+            if(!$elem->validate()) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    /**
+     * @param array $attrArray
+     * @return string
+     */
+    protected function renderAttr(array $attrArray) {
 		$attr = "";
 		foreach($attrArray as $name => $value) {
 			$attr .= $name."=\"{$value}\" ";

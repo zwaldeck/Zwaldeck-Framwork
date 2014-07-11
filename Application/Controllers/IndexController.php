@@ -23,6 +23,8 @@ use Zwaldeck\Form\Element\RadioElement;
 use Zwaldeck\Form\Element\Text\TextElement;
 use Zwaldeck\Form\Label;
 use Zwaldeck\Form\Form;
+use Zwaldeck\Form\Validation\Validators;
+use Zwaldeck\Registry\Registry;
 use Zwaldeck\Util\Utils;
 
 class IndexController extends Controller {
@@ -61,7 +63,16 @@ class IndexController extends Controller {
 		$text = new TextElement('text');
 		$text->setSize(20);
 		$text->setLabel($textLabel);
-		
+        $text->addValidator("stringlen", array(
+           'type' => Validators::Required,
+           'field' => $text->getValue(),
+           'options' => array(
+                'min' => 3,
+                'max' => 20,
+           ),
+        ));
+
+        $submit = new SubmitElement("submit", "Verzend");
 		$form = new Form('form');
 		$form->setMethod('POST');
 		$form->setFieldset(true);
@@ -69,10 +80,16 @@ class IndexController extends Controller {
 		$form->addElement($elem);
 		$form->addElement($sel);
 		$form->addElement($text);
-		
+        $form->addElement($submit);
 
-		$this->set('form', $form);
+        $request = $this->getRequest();
+        if($request->isPost()) {
+            if($form->isValid()) {
+                echo "VALID";
+            }
+        }
 
+        $this->set('form', $form);
 	}
 }
 
