@@ -145,7 +145,7 @@ abstract class AbstractElement
     }
 
     /**
-     * @return the $value
+     * @return string
      */
     public function getValue()
     {
@@ -153,7 +153,7 @@ abstract class AbstractElement
     }
 
     /**
-     * @return the $label
+     * @return Label
      */
     public function getLabel()
     {

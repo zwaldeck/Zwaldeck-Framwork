@@ -40,7 +40,6 @@ class FormElementFinder {
         throw new \ElementNotFoundException("No element with id:\"{$id}\" is not found");
     }
 
-
     /**
      * @param $class
      * @return array

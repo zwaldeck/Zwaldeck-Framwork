@@ -487,7 +487,8 @@ class Form
     /**
      * @return array
      */
-    public function getErrorMsg() {
+    public function getErrorMsg()
+    {
         return $this->errorMsg;
     }
 
@@ -498,8 +499,9 @@ class Form
      * @param array $array
      * @throws \InvalidArgumentException
      */
-    public function setErrorMsg(array $array) {
-        if(!is_array($array)) {
+    public function setErrorMsg(array $array)
+    {
+        if (!is_array($array)) {
             throw new \InvalidArgumentException("$array must be an array");
         }
 
@@ -511,12 +513,13 @@ class Form
      * @param string $errormsg
      * @throws \InvalidArgumentException
      */
-    public function addErrorMsg($fieldid, $errormsg) {
-        if(!is_string($fieldid) || trim($fieldid) == "") {
+    public function addErrorMsg($fieldid, $errormsg)
+    {
+        if (!is_string($fieldid) || trim($fieldid) == "") {
             throw new \InvalidArgumentException('$fieldid must be a string and not empty');
         }
 
-        if(!is_string($errormsg) || trim($errormsg) == "") {
+        if (!is_string($errormsg) || trim($errormsg) == "") {
             throw new \InvalidArgumentException('$errormsg must be a string and not empty');
         }
 
@@ -549,6 +552,44 @@ class Form
 
         $form .= "</form>";
         return $form;
+    }
+
+
+    /**
+     * element defined by placeholder,
+     * if plcacehodlder is empty,
+     *                    label,
+     * if label is empty,
+     *                   name
+     *
+     * @return string
+     */
+    public function renderErrors()
+    {
+        $finder = new FormElementFinder($this);
+        $errors = $this->getErrorMsg();
+
+        $buffer = "";
+        if (count($errors) > 0) {
+            $buffer .= "<fieldset><legend>Errors</legend>";
+            foreach ($errors as $id => $error) {
+                $elem = $finder->findElementByID($id);
+                $name = ""
+                if(method_exists($elem, 'getPlaceholder')) {
+                    $name = trim($elem->getPlaceholder());
+                }
+                if($name == "") {
+                    $name = trim($elem->getLabel()->getText());
+                    if($name == "") {
+                        $name = trim($elem->getId());
+                    }
+                }
+
+                $buffer .= "<span>{$elem} {$error}";
+            }
+            $buffer .= "</fieldset>";
+        }
+        return $buffer;
     }
 
 
