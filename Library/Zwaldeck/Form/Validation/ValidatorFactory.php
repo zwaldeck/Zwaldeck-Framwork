@@ -39,6 +39,16 @@ class ValidatorFactory {
                     $options = $arr['options'];
                     $validator = new GreatherThanValidator($arr['field'], $options['number']);
                     break;
+                case Validators::Lesser:
+                    self::checkGreatherErrors($arr);
+                    $options = $arr['options'];
+                    $validator = new LessThanValidator($arr['field'], $options['number']);
+                    break;
+                case Validators::Regex:
+                    self::checkRegexErrors($arr);
+                    $options = $arr['options'];
+                    $validator = new RegexValidator($arr['field'], $options['regex']);
+                    break;
                 case Validators::Number:
                     $validator = new NumberValidator($arr['field']);
                     break;
@@ -150,6 +160,30 @@ class ValidatorFactory {
 
         if(!is_integer($tempArr['number'])) {
             throw new \InvalidArgumentException("Options[number] must contain an integer");
+        }
+    }
+
+    /**
+     * @param array $arr
+     * @throws \InvalidArgumentException
+     */
+    private static function checkRegexErrors(array $arr) {
+        if(!array_key_exists('options',$arr)) {
+            throw new \InvalidArgumentException("Array must contain options key");
+        }
+
+        $tempArr = $arr['options'];
+
+        if(!is_array($tempArr)) {
+            throw new \InvalidArgumentException("Options must contain an array");
+        }
+
+        if(!array_key_exists('regex',$tempArr)) {
+            throw new \InvalidArgumentException("regex must contain low key");
+        }
+
+        if(!is_string($tempArr['regex']) || trim($tempArr['regex']) == "") {
+            throw new \InvalidArgumentException("Options[regex] must be a valid string and may not be empty");
         }
     }
 } 

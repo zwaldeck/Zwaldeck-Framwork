@@ -69,12 +69,11 @@ class IndexController extends Controller {
            'type' => Validators::Required,
            'field' => $text->getName(),
         ));
-        $text->addValidator("greather", array(
-           'type' => Validators::Greather,
+        $text->addValidator("regex", array(
+           'type' => Validators::Regex,
            'field' => $text->getName(),
            'options' => array(
-                'number' => 5,
-                'high' => 20,
+                'regex' => '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\z',
            ),
         ));
 

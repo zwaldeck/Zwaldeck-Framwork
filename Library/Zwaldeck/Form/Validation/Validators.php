@@ -16,4 +16,6 @@ class Validators {
     const Email = "email";
     const Between = "between";
     const Greather = "greatherthan";
+    const Lesser = "lesser";
+    const Regex = "regex";
 } 
