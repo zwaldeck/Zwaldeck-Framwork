@@ -19,7 +19,8 @@ if (strtolower(ENV) == "development") {
 use Zwaldeck\Exception\Exception404;
 
 try {
-    require_once(ROOT . DS . 'Library/bootstrap.php');
+    require_once(ROOT . DS . 'Library/Zwaldeck/Bootstrap.php');
+    new Zwaldeck\Bootstrap();
 } catch (InvalidArgumentException $e) {
     showError($e);
 } catch (Exception404 $e) {
@@ -45,5 +46,3 @@ $time = $time[1] + $time[0];
 $finish = $time;
 $total_time = round(($finish - $start), 4);
 echo 'Page generated in ' . $total_time . ' seconds.';
-?>
-

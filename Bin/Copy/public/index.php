@@ -5,7 +5,7 @@ define('ROOT', dirname(dirname(__FILE__)));
 use Zwaldeck\Exception\Exception404;
 
 try {
-	require_once (ROOT.DS.'library/bootstrap.php');
+	require_once (ROOT.DS.'library/Bootstrap.php');
 }catch(InvalidArgumentException $e) {
 	showError($e);
 }
