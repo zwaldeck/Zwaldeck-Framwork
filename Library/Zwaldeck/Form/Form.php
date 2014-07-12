@@ -574,7 +574,7 @@ class Form
             $buffer .= "<fieldset><legend>Errors</legend>";
             foreach ($errors as $id => $error) {
                 $elem = $finder->findElementByID($id);
-                $name = ""
+                $name = "";
                 if(method_exists($elem, 'getPlaceholder')) {
                     $name = trim($elem->getPlaceholder());
                 }
