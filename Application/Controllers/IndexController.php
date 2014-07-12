@@ -65,13 +65,35 @@ class IndexController extends Controller {
 		$text = new TextElement('text');
 		$text->setSize(20);
 		$text->setLabel($textLabel);
-        $text->addValidator("stringlen", array(
+        $text->addValidator('reqText', array(
            'type' => Validators::Required,
+           'field' => $text->getName(),
+        ));
+        $text->addValidator("number", array(
+           'type' => Validators::Email,
            'field' => $text->getName(),
            'options' => array(
                 'min' => 3,
                 'max' => 20,
            ),
+        ));
+
+
+        $textLabel2 = new Label('textLab2', 'text2', 'textElement2');
+        $text2 = new TextElement('text2');
+        $text2->setSize(20);
+        $text2->setLabel($textLabel2);
+        $text2->addValidator('reqText', array(
+            'type' => Validators::Required,
+            'field' => $text2->getName(),
+        ));
+        $text2->addValidator("stringlen", array(
+            'type' => Validators::StringLen,
+            'field' => $text2->getName(),
+            'options' => array(
+                'min' => 3,
+                'max' => 20,
+            ),
         ));
 
         $submit = new SubmitElement("submit", "Verzend");
@@ -82,6 +104,7 @@ class IndexController extends Controller {
 		$form->addElement($elem);
 		$form->addElement($sel);
 		$form->addElement($text);
+        $form->addElement($text2);
         $form->addElement($submit);
 
         $request = $this->getRequest();

@@ -31,12 +31,12 @@ class StringLengthValidator extends AbstractValidator
 
     public function __construct($fieldValue, $min = 0, $max = 0)
     {
-        parent::__construct($fieldValue, ERROR_NR);
+        parent::__construct($fieldValue, self::ERROR_NR);
         $this->max = abs($max);
         $this->min = abs($min);
 
         if($this->max > 0)
-            $this->errorMessage = "Field must be longer than {$this->min} and smaller than {$this->max}";
+            $this->errorMessage = "Field must be longer than {$this->min} and smaller than {$this->max} characters";
         else
             $this->errorMessage = "Field must be longer than {$this->min}";
     }

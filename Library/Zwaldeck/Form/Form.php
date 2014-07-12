@@ -587,7 +587,7 @@ class Form
                     }
                 }
 
-                $buffer .= "<li>{$name} {$error}</li>";
+                $buffer .= "<li>{$name} &#x2192; {$error}</li>";
             }
             $buffer .= "</ul></fieldset>";
         }

@@ -23,12 +23,17 @@ class ValidatorFactory {
             switch($arr['type']) {
                 case Validators::Required:
                     $validator = new RequiredValidator($arr['field']);
-
                     break;
                 case Validators::StringLen:
                     self::checkStringLenErrors($arr);
                     $options = $arr['options'];
                     $validator = new StringLengthValidator($arr['field'], $options['min'], $options['max']);
+                    break;
+                case Validators::Number:
+                    $validator = new NumberValidator($arr['field']);
+                    break;
+                case Validators::Email:
+                    $validator = new EmailValidator($arr['field']);
                     break;
                 default:
                     throw new \Exception("Zwaldeck framework does not know the type: {$arr['type']}");
