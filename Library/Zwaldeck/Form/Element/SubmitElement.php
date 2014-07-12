@@ -30,12 +30,12 @@ class SubmitElement extends AbstractElement{
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';
-        var_dump($class);
 		return "<input type=\"submit\" id=\"{$this->id}\" name=\"{$this->name}\"  {$attr} {$class} value=\"{$this->value}\"{$disabled} />";
 	}
 
 	public function validate() {
-		//doesn't do anything		
+		//doesn't do anything
+        return "";
 	}
 
 		

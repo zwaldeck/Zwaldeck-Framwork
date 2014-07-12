@@ -44,7 +44,6 @@ class Upload {
 	 * @param array $file
 	 */
 	public function __construct(array $file) {
-		var_dump($file);
 		$this->_names [] = $file ['name'];
 		$this->_types [] = $file ['type'];
 		$this->_tmp_names [] = $file ['tmp_name'];

@@ -67,7 +67,7 @@ class IndexController extends Controller {
 		$text->setLabel($textLabel);
         $text->addValidator("stringlen", array(
            'type' => Validators::Required,
-           'field' => $text->getValue(),
+           'field' => $text->getName(),
            'options' => array(
                 'min' => 3,
                 'max' => 20,

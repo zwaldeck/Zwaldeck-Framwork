@@ -9,13 +9,6 @@ class DateElement extends AbstractElement {
 		parent::__construct($id);
 	}
 	
-	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();
-	}
-	
 	public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();

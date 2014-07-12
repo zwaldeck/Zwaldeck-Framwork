@@ -101,7 +101,7 @@ class ButtonElement extends AbstractElement {
 
 	public function validate() {
 		//Does Nothing in this element
-		
+		return "";
 	}
 	
 	public function render() {

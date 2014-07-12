@@ -539,6 +539,8 @@ class Form
                 $form .= "<legend {$this->renderAttr($this->legendAtrr)}>{$this->legend}</legend>";
             }
         }
+
+        $form .= $this->renderErrors();
         foreach ($this->elements as $element) {
             if ($element->getLabel() !== null) {
                 $form .= $element->getLabel()->render() . ' ';
@@ -571,7 +573,7 @@ class Form
 
         $buffer = "";
         if (count($errors) > 0) {
-            $buffer .= "<fieldset><legend>Errors</legend>";
+            $buffer .= "<fieldset><legend>Errors</legend><ul>";
             foreach ($errors as $id => $error) {
                 $elem = $finder->findElementByID($id);
                 $name = "";
@@ -585,9 +587,9 @@ class Form
                     }
                 }
 
-                $buffer .= "<span>{$elem} {$error}";
+                $buffer .= "<li>{$name} {$error}</li>";
             }
-            $buffer .= "</fieldset>";
+            $buffer .= "</ul></fieldset>";
         }
         return $buffer;
     }
@@ -599,15 +601,19 @@ class Form
             return true;
         }
 
+        $valid = true;
         foreach ($this->elements as $elem) {
+            /** @var AbstractElement $elem */
             if (count($elem->getValidators()) > 0) {
-                if (!$elem->validate()) {
-                    return false;
+                $validateMsg = trim($elem->validate());
+                if ( $validateMsg != "") {
+                    $this->addErrorMsg($elem->getId(), $validateMsg);
+                    $valid = false;
                 }
             }
         }
 
-        return true;
+        return $valid;
 
     }
 

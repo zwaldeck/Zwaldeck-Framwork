@@ -68,13 +68,7 @@ class TextAreaElement extends AbstractTextElement {
 	
 		$this->cols = $cols;
 	}
-	
-	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();
-	}
+
 	public function render() {
 		$rows = $this->rows == 0 ? '' : 'rows="'.$this->rows.'"';
 		$cols = $this->cols == 0 ? '' : 'cols="'.$this->cols.'"';

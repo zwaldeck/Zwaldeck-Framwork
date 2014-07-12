@@ -92,13 +92,6 @@ class CheckBoxElement extends AbstractElement {
 	}
 	
 	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();
-	}
-	
-	/**
 	 * Render with label
 	 */
 	public function render() {

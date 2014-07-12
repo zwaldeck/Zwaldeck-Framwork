@@ -20,13 +20,6 @@ class HiddenElement extends AbstractElement {
 		$this->value = $value;
 	}
 	
-	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();
-	}
-	
 	public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();

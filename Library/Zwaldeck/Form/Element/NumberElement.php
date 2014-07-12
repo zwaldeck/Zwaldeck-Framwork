@@ -148,13 +148,6 @@ class NumberElement extends AbstractElement {
 	
 		$this->step = abs($step);
 	}
-
-	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();
-	}
 	
 	public function render() {
 		$attr = $this->renderAttr();

@@ -94,7 +94,18 @@ abstract class AbstractElement
 
     abstract function render();
 
-    abstract function validate();
+    /**
+     * validates the element
+     * @return string
+     */
+    public function validate() {
+        foreach ($this->validators as $validator) {
+            if (!$validator->isValid()) {
+                return $validator->getError();
+            }
+        }
+        return "";
+    }
 
     /**
      * @return the $id

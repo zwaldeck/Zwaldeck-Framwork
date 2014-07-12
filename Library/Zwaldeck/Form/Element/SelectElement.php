@@ -149,13 +149,6 @@ class SelectElement extends AbstractElement {
 		$this->size = $size;
 	}
 	
-	/**
-	 * @throws NotImplementedYet
-	 */
-	public function validate() {
-		throw new NotImplementedYet();	
-	}
-	
 	public function render() {
 		$size = $this->size == 0 ? '' : 'size="'.$this->size.'"';
 		$attr = $this->renderAttr();

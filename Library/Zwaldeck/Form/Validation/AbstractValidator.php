@@ -29,7 +29,7 @@ abstract class AbstractValidator {
     protected $fieldValue;
 
     protected function __construct($field = "", $errorNr = 700) {
-        $this->fieldValue = $field;
+        $this->fieldValue = $_POST[$field];
         $this->errornr = $errorNr;
     }
 

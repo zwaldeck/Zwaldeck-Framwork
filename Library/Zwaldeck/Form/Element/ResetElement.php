@@ -31,9 +31,6 @@ class ResetElement extends AbstractElement {
 		return "<input type=\"reset\" id=\"{$this->id}\" name=\"{$this->name}\" {$attr} {$class} value=\"{$this->value}\"{$disabled} />";		
 	}
 
-	public function validate() {
-		//doesn't do anything		
-	}
 }
 
 ?>
