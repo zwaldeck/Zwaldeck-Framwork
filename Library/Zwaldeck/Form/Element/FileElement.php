@@ -2,8 +2,11 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
-
+/**
+ * Class FileElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class FileElement extends AbstractElement{
 	
 	/**
@@ -17,8 +20,13 @@ class FileElement extends AbstractElement{
 	 * @var integer
 	 */
 	private $size;
-	
-	public function __construct($id, $multiple = false ,$size = 0) {
+
+    /**
+     * @param string $id
+     * @param bool $multiple
+     * @param int $size
+     */
+    public function __construct($id, $multiple = false ,$size = 0) {
 		parent::__construct($id);
 		
 		$this->multiple = $multiple;
@@ -43,8 +51,11 @@ class FileElement extends AbstractElement{
 		
 		$this->multiple = $multiple;
 	}
-	
-	public function getSize() {
+
+    /**
+     * @return int
+     */
+    public function getSize() {
 		return $this->size;
 	}
 	
@@ -59,8 +70,11 @@ class FileElement extends AbstractElement{
 		
 		$this->size = $size;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$size = $this->size == 0 ? '' : 'size="'.$this->size.'"';
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();

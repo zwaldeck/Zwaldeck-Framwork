@@ -16,6 +16,9 @@ class FormElementFinder {
      */
     private $form;
 
+    /**
+     * @param Form $form
+     */
     public function __construct(Form $form) {
         if(!$form instanceof Form) {
             throw new \InvalidArgumentException("$form must be an instance of Zwaldeck\\Form\\Form");

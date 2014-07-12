@@ -29,6 +29,11 @@ class StringLengthValidator extends AbstractValidator
      */
     private $max;
 
+    /**
+     * @param string $fieldValue
+     * @param int $min
+     * @param int $max
+     */
     public function __construct($fieldValue, $min = 0, $max = 0)
     {
         parent::__construct($fieldValue, self::ERROR_NR);
@@ -41,6 +46,9 @@ class StringLengthValidator extends AbstractValidator
             $this->errorMessage = "Field must be longer than {$this->min}";
     }
 
+    /**
+     * @return bool
+     */
     public function isValid()
     {
         if ($this->max > 0) {

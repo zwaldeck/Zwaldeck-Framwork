@@ -2,6 +2,11 @@
 
 namespace Zwaldeck\Form;
 
+/**
+ * Class Label
+ * @package Zwaldeck\Form
+ * @author wout schoovaerts
+ */
 class Label {
 	/**
 	 * id off the element
@@ -35,13 +40,14 @@ class Label {
 	 * @var $text
 	 */
 	private $text;
-	
-	/**
-	 *
-	 * @param string $id can only be set in constructor
-	 * @throws \InvalidArgumentException
-	 */
-	public function __construct($id, $for, $text) {
+
+    /**
+     * @param string $id
+     * @param string $for
+     * @param string $text
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($id, $for, $text) {
 		if(!is_string($id) || trim($id) == "") {
 			throw new \InvalidArgumentException('$id must be a string and not empty');
 		}
@@ -144,16 +150,23 @@ class Label {
 		
 		$this->attr[$name] = $value;
 	}
-	
-	public function addClass($name) {
+
+    /**
+     * @param string $name
+     * @throws \InvalidArgumentException
+     */
+    public function addClass($name) {
 		if(!is_string($name) || trim($name) == "") {
 			throw new \InvalidArgumentException('$name must be a string and not empty');
 		}
 		
 		$this->classes[] = $name;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$class = "class=\"";
 		foreach($this->classes as $className) {
 			$class .= $className." ";

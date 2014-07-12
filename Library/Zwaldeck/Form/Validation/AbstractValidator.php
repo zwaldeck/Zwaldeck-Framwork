@@ -28,21 +28,35 @@ abstract class AbstractValidator {
      */
     protected $fieldValue;
 
+    /**
+     * @param string $field
+     * @param int $errorNr
+     */
     protected function __construct($field = "", $errorNr = 700) {
         $this->fieldValue = isset($_POST[$field]) ? $_POST[$field] : "";
         $this->errornr = $errorNr;
     }
 
+
     public abstract function isValid();
 
+    /**
+     * @param string $message
+     */
     protected function setErrorMessage($message) {
        $this->errorMessage = $message;
     }
 
+    /**
+     * @return string
+     */
     protected function getErrorMessage() {
         return $this->errorMessage;
     }
 
+    /**
+     * @return int
+     */
     protected function getErrorNR() {
         if(trim($this->errorMessage) == "")
             return 0;
@@ -50,6 +64,9 @@ abstract class AbstractValidator {
             return $this->errornr;
     }
 
+    /**
+     * @return string
+     */
     public function getError() {
         return $this->errornr .": ".$this->errorMessage;
     }

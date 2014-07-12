@@ -3,9 +3,9 @@
 namespace Zwaldeck\Form\Element;
 
 /**
- * Text = value
- * @author Wout Schoovaerts
- *
+ * Class ButtonElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
  */
 class ButtonElement extends AbstractElement {
 
@@ -99,12 +99,18 @@ class ButtonElement extends AbstractElement {
 		$this->type = $type;
 	}
 
-	public function validate() {
+    /**
+     * @return string
+     */
+    public function validate() {
 		//Does Nothing in this element
 		return "";
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

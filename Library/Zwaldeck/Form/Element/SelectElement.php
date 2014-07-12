@@ -2,9 +2,14 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
 use Zwaldeck\Form\Element\Helper\OptGroup;
 use Zwaldeck\Form\Element\Helper\Option;
+
+/**
+ * Class SelectElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class SelectElement extends AbstractElement {
 	
 	/**
@@ -38,11 +43,14 @@ class SelectElement extends AbstractElement {
 	 * @var integer
 	 */
 	private $size;
-	
-	/**
-	 * @param string $id
-	 */
-	public function __construct($id,$multiple = false, $size = 0, $autofocus = false) {
+
+    /**
+     * @param string $id
+     * @param bool $multiple
+     * @param int $size
+     * @param bool $autofocus
+     */
+    public function __construct($id,$multiple = false, $size = 0, $autofocus = false) {
 		parent::__construct($id);
 		
 		$this->optGroups = array();
@@ -138,18 +146,22 @@ class SelectElement extends AbstractElement {
 	public function getSize() {
 		return $this->size;
 	}
-	
-	/**
-	 * @param number $size
-	 */
-	public function setSize($size) {
+
+    /**
+     * @param $size
+     * @throws \InvalidArgumentException
+     */
+    public function setSize($size) {
 		if(!is_int($size)) {
 			throw new \InvalidArgumentException('$size must be an integer');
 		}
 		$this->size = $size;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$size = $this->size == 0 ? '' : 'size="'.$this->size.'"';
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();

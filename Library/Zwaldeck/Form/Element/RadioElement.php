@@ -2,10 +2,11 @@
 namespace Zwaldeck\Form\Element;
 
 use Zwaldeck\Form\Label;
-use Zwaldeck\Exception\NotImplementedYet;
 
 /**
- * @author Wout Schoovaerts
+ * Class RadioElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
  */
 class RadioElement extends AbstractElement {
 	
@@ -66,35 +67,50 @@ class RadioElement extends AbstractElement {
 		$this->disabled = $disabled;
 		$this->autofocus = $autfocus;
 	}
-	
-	public function getAutofocus() {
+
+    /**
+     * @return bool
+     */
+    public function getAutofocus() {
 		return $this->autofocus;
 	}
-	
-	public function setAutofocus($autofocus) {
+
+    /**
+     * @param $autofocus
+     * @throws \InvalidArgumentException
+     */
+    public function setAutofocus($autofocus) {
 		if(!is_bool($autofocus)) {
 			throw new \InvalidArgumentException('$autofocus must be true or false');
 		}
 		
 		$this->autofocus = $autofocus;
 	}
-	
-	public function getChecked() {
+
+    /**
+     * @return bool
+     */
+    public function getChecked() {
 		return $this->checked;
 	}
-	
-	public function setChecked($checked) {
+
+    /**
+     * @param $checked
+     * @throws \InvalidArgumentException
+     */
+    public function setChecked($checked) {
 		if(!is_bool($checked)) {
 			throw new \InvalidArgumentException('$checked must be true or false');
 		}
 		
 		$this->checked = $checked;
 	}
-	
-	/**
-	 * Render with label
-	 */
-	public function render() {
+
+    /**
+     * render with label
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

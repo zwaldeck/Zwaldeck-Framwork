@@ -7,6 +7,11 @@ use Zwaldeck\Form\Validation\AbstractValidator;
 use Zwaldeck\Form\Validation\ValidatorFactory;
 use Zwaldeck\Util\Utils;
 
+/**
+ * Class AbstractElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 abstract class AbstractElement
 {
 
@@ -328,6 +333,12 @@ abstract class AbstractElement
         }
     }
 
+    /**
+     * @param string $key
+     * @param array $validator
+     * @throws \InvalidArgumentException
+     * @throws \Exception
+     */
     public function addValidator($key, array $validator)
     {
         if (!is_array($validator)) {
@@ -342,6 +353,10 @@ abstract class AbstractElement
         $this->validators[$key] = $value;
     }
 
+    /**
+     * @param string $key
+     * @throws \InvalidArgumentException
+     */
     public function removeValidator($key)
     {
         if (!array_key_exists($this->validators, $key)) {

@@ -1,15 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wout
- * Date: 7/11/14
- * Time: 2:52 PM
- */
 
 namespace Zwaldeck\Exception;
 
-
+/**
+ * Class ElementNotFoundException
+ * @package Zwaldeck\Exception
+ * @author wout schoovaerts
+ */
 class ElementNotFoundException extends \Exception {
+
     /**
      *
      * @param string $message

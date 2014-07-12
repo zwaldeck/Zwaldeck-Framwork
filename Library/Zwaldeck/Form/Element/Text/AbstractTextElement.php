@@ -4,6 +4,11 @@ namespace Zwaldeck\Form\Element\Text;
 
 use Zwaldeck\Form\Element\AbstractElement;
 
+/**
+ * Class AbstractTextElement
+ * @package Zwaldeck\Form\Element\Text
+ * @author wout schoovaerts
+ */
 abstract class AbstractTextElement extends AbstractElement {
 	
 	/**
@@ -25,8 +30,11 @@ abstract class AbstractTextElement extends AbstractElement {
 	 * @var string
 	 */
 	protected $placeholder;
-	
-	public function __construct($id) {
+
+    /**
+     * @param string $id
+     */
+    public function __construct($id) {
 		parent::__construct($id);
 		$this->readonly = false;
 		$this->maxlenght = 0;

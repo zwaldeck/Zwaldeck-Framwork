@@ -1,14 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wout
- * Date: 7/12/14
- * Time: 2:52 PM
- */
 
 namespace Zwaldeck\Form\Validation;
 
-
+/**
+ * Class RegexValidator
+ * @package Zwaldeck\Form\Validation
+ * @author wout schoovaerts
+ */
 class RegexValidator extends AbstractValidator {
     const ERROR_NR = 708;
 
@@ -17,6 +15,10 @@ class RegexValidator extends AbstractValidator {
      */
     private $regex;
 
+    /**
+     * @param string $fieldValue
+     * @param int $regex
+     */
     public function __construct($fieldValue, $regex)
     {
         parent::__construct($fieldValue, self::ERROR_NR);
@@ -24,6 +26,9 @@ class RegexValidator extends AbstractValidator {
         $this->regex = trim($regex);
     }
 
+    /**
+     * @return int
+     */
     public function isValid()
     {
         return preg_match('/'.$this->regex.'/', $this->fieldValue);

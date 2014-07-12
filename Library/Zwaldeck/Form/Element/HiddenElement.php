@@ -2,7 +2,11 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
+/**
+ * Class HiddenElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class HiddenElement extends AbstractElement {
 
 	/**
@@ -19,8 +23,11 @@ class HiddenElement extends AbstractElement {
 		
 		$this->value = $value;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		return "<input type=\"hidden\" id=\"{$this->id}\" name=\"{$this->name}\" {$attr} {$class} value=\"{$this->value}\" />";

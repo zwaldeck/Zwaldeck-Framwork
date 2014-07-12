@@ -2,8 +2,11 @@
 
 namespace Zwaldeck\Form\Element\Text;
 
-use Zwaldeck\Exception\NotImplementedYet;
-
+/**
+ * Class TextAreaElement
+ * @package Zwaldeck\Form\Element\Text
+ * @author wout schoovaerts
+ */
 class TextAreaElement extends AbstractTextElement {
 	
 	/**
@@ -19,8 +22,11 @@ class TextAreaElement extends AbstractTextElement {
 	 * @var integer
 	 */
 	private $cols;
-	
-	public function __construct($id) {
+
+    /**
+     * @param string $id
+     */
+    public function __construct($id) {
 		parent::__construct($id);
 		
 		$this->rows = 0;
@@ -69,7 +75,10 @@ class TextAreaElement extends AbstractTextElement {
 		$this->cols = $cols;
 	}
 
-	public function render() {
+    /**
+     * @return string
+     */
+    public function render() {
 		$rows = $this->rows == 0 ? '' : 'rows="'.$this->rows.'"';
 		$cols = $this->cols == 0 ? '' : 'cols="'.$this->cols.'"';
 		$attr = $this->renderAttr();

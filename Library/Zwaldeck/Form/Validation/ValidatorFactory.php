@@ -1,9 +1,6 @@
 <?php
 
 namespace Zwaldeck\Form\Validation;
-use Zwaldeck\Form\Validation\RequiredValidator;
-use Zwaldeck\Form\Validation\StringLengthValidator;
-use Zwaldeck\Form\Validation\Validators;
 
 /**
  * Class ValidatorFactory

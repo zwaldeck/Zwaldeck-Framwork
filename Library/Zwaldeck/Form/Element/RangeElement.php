@@ -2,7 +2,11 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
+/**
+ * Class RangeElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class RangeElement extends AbstractElement {
 	
 	/**
@@ -147,8 +151,11 @@ class RangeElement extends AbstractElement {
 	
 		$this->step = abs($step);
 	}
-	
-	public function render() {
+
+    /**
+     * @return stringsv
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

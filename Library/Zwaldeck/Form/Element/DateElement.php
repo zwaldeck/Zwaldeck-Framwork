@@ -2,14 +2,24 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
+/**
+ * Class DateElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class DateElement extends AbstractElement {
-	
-	public function __construct($id) {
+
+    /**
+     * @param string $id
+     */
+    public function __construct($id) {
 		parent::__construct($id);
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

@@ -2,8 +2,11 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
-
+/**
+ * Class NumberElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class NumberElement extends AbstractElement {
 	
 	/**
@@ -148,8 +151,11 @@ class NumberElement extends AbstractElement {
 	
 		$this->step = abs($step);
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

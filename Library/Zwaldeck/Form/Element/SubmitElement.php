@@ -1,7 +1,11 @@
 <?php
 namespace Zwaldeck\Form\Element;
-use Zwaldeck\Form\Element\AbstractElement;
 
+/**
+ * Class SubmitElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class SubmitElement extends AbstractElement{
 	
 	/**
@@ -24,16 +28,21 @@ class SubmitElement extends AbstractElement{
 		$this->disabled = $disabled;
 
 	}
-	
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';
 		return "<input type=\"submit\" id=\"{$this->id}\" name=\"{$this->name}\"  {$attr} {$class} value=\"{$this->value}\"{$disabled} />";
 	}
 
-	public function validate() {
+    /**
+     * @return string
+     */
+    public function validate() {
 		//doesn't do anything
         return "";
 	}

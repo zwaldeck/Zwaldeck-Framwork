@@ -2,6 +2,11 @@
 
 namespace Zwaldeck\Form\Element\Helper;
 
+/**
+ * Class Option
+ * @package Zwaldeck\Form\Element\Helper
+ * @author wout schoovaerts
+ */
 class Option {
 	/**
 	 * disabled attribute
@@ -121,16 +126,23 @@ class Option {
 	public function getText() {
 		return $this->text;
 	}
-	
-	public function setText($text) {
+
+    /**
+     * @param string $text
+     * @throws \InvalidArgumentException
+     */
+    public function setText($text) {
 		if(!is_string($text)) {
 			throw new \InvalidArgumentException('$text must be a valid string');
 		}
 		
 		$this->text = $text;
 	}
-	
-	public function render() {
+
+    /**+
+     * @return string
+     */
+    public function render() {
 		$dis = $this->disabled ? 'disabled' : "";
 		$sel = $this->selected ? 'selected' : "";
 		

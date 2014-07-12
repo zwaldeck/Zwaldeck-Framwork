@@ -2,8 +2,11 @@
 
 namespace Zwaldeck\Form\Element;
 
-use Zwaldeck\Exception\NotImplementedYet;
-
+/**
+ * Class ColorElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
 class ColorElement extends AbstractElement {
 	
 	/**
@@ -11,8 +14,11 @@ class ColorElement extends AbstractElement {
 	 * @var string
 	 */
 	private $color;
-	
-	private static $COLORREGEX = "/#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?\\b/";
+
+    /**
+     * @var string color regex
+     */
+    private static $COLORREGEX = "/#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?\\b/";
 	
 	/**
 	 * @param string $id
@@ -46,8 +52,11 @@ class ColorElement extends AbstractElement {
 		
 		$this->color = $color;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

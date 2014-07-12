@@ -2,7 +2,11 @@
 
 namespace Zwaldeck\Form\Validation;
 
-
+/**
+ * Class LessThanValidator
+ * @package Zwaldeck\Form\Validation
+ * @author wout schoovaerts
+ */
 class LessThanValidator extends AbstractValidator
 {
     const ERROR_NR = 707;
@@ -12,7 +16,10 @@ class LessThanValidator extends AbstractValidator
      */
     private $number;
 
-
+    /**
+     * @param string $fieldValue
+     * @param int $number
+     */
     public function __construct($fieldValue, $number)
     {
         parent::__construct($fieldValue, self::ERROR_NR);
@@ -22,6 +29,9 @@ class LessThanValidator extends AbstractValidator
         $this->setErrorMessage("Field must be numeric and lesser than {$this->number}");
     }
 
+    /**
+     * @return bool
+     */
     public function isValid()
     {
         if (!is_numeric($this->fieldValue)) {

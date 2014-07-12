@@ -4,6 +4,11 @@ namespace Zwaldeck\Form;
 
 use Zwaldeck\Form\Element\AbstractElement;
 
+/**
+ * Class Form
+ * @package Zwaldeck\Form
+ * @author wout schoovaerts
+ */
 class Form
 {
     /**
@@ -113,7 +118,7 @@ class Form
     );
 
     /**
-     *
+     * @param string $id
      * @param string $method
      * @param string $enctype
      * @param string $action
@@ -197,6 +202,7 @@ class Form
      * Add element to the stack
      *
      * @param AbstractElement $element
+     * @throws \Exception
      */
     public function addElement(AbstractElement $element)
     {
@@ -243,6 +249,11 @@ class Form
         return $this->elements;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function getElement($id)
     {
         if (key_exists($id, $this->elements)) {
@@ -368,7 +379,7 @@ class Form
     }
 
     /**
-     * @param string $fieldset
+     * @param string $legend
      * @throws \InvalidArgumentException
      */
     public function setLegend($legend)
@@ -594,7 +605,9 @@ class Form
         return $buffer;
     }
 
-
+    /**
+     * @return bool
+     */
     public function isValid()
     {
         if ($this->elements == null) {

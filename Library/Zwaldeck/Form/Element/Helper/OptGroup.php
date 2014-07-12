@@ -2,6 +2,11 @@
 
 namespace Zwaldeck\Form\Element\Helper;
 
+/**
+ * Class OptGroup
+ * @package Zwaldeck\Form\Element\Helper
+ * @author wout schoovaerts
+ */
 class OptGroup {
 	
 	/**
@@ -95,13 +100,20 @@ class OptGroup {
 	public function setOptions(array $options) {
 		$this->options = $options;
 	}
-	
-	public function addOption(Option $option) {
+
+    /**
+     * @param Option $option
+     */
+    public function addOption(Option $option) {
 		
 		$this->options[] = $option;
 	}
-	
-	public function render() {
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function render() {
 		$dis = $this->disabled ? 'disabled' : "";
 		$opt = "<optgroup label={$this->label} {$dis}>";
 		

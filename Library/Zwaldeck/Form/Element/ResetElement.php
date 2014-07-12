@@ -2,8 +2,14 @@
 
 namespace Zwaldeck\Form\Element;
 
-class ResetElement extends AbstractElement {
 /**
+ * Class ResetElement
+ * @package Zwaldeck\Form\Element
+ * @author wout schoovaerts
+ */
+class ResetElement extends AbstractElement {
+
+    /**
 	 * 
 	 * @param string $id
 	 * @param string $value
@@ -22,9 +28,11 @@ class ResetElement extends AbstractElement {
 		$this->value = $value;
 		$this->disabled = $disabled;
 	}
-	
-	
-	public function render() {
+
+    /**
+     * @return string
+     */
+    public function render() {
 		$attr = $this->renderAttr();
 		$class = $this->renderClasses();
 		$disabled = $this->disabled ? 'disabled' : '';

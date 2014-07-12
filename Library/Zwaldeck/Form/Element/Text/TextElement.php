@@ -2,9 +2,11 @@
 
 namespace Zwaldeck\Form\Element\Text;
 
-use Zwaldeck\Exception\NotImplementedYet;
-use Zwaldeck\Util\Utils;
-
+/**
+ * Class TextElement
+ * @package Zwaldeck\Form\Element\Text
+ * @author wout schoovaerts
+ */
 class TextElement extends AbstractTextElement
 {
 
@@ -92,12 +94,9 @@ class TextElement extends AbstractTextElement
         $this->size = $size;
     }
 
-
-    /*public function validate()
-    {
-        //
-    }*/
-
+    /**
+     * @return string
+     */
     public function render()
     {
         $size = $this->size == 0 ? '' : 'size="' . $this->size . '"';
