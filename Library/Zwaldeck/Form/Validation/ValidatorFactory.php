@@ -29,6 +29,16 @@ class ValidatorFactory {
                     $options = $arr['options'];
                     $validator = new StringLengthValidator($arr['field'], $options['min'], $options['max']);
                     break;
+                case Validators::Between:
+                    self::checkBetweenErrors($arr);
+                    $options = $arr['options'];
+                    $validator = new BetweenValidator($arr['field'], $options['low'], $options['high']);
+                    break;
+                case Validators::Greather:
+                    self::checkGreatherErrors($arr);
+                    $options = $arr['options'];
+                    $validator = new GreatherThanValidator($arr['field'], $options['number']);
+                    break;
                 case Validators::Number:
                     $validator = new NumberValidator($arr['field']);
                     break;
@@ -84,6 +94,62 @@ class ValidatorFactory {
 
         if(!is_integer($tempArr['max'])) {
             throw new \InvalidArgumentException("Options[max] must contain an integer");
+        }
+    }
+
+    /**
+     * @param array $arr
+     * @throws \InvalidArgumentException
+     */
+    private static function checkBetweenErrors(array $arr) {
+        if(!array_key_exists('options',$arr)) {
+            throw new \InvalidArgumentException("Array must contain options key");
+        }
+
+        $tempArr = $arr['options'];
+
+        if(!is_array($tempArr)) {
+            throw new \InvalidArgumentException("Options must contain an array");
+        }
+
+        if(!array_key_exists('low',$tempArr)) {
+            throw new \InvalidArgumentException("Options must contain low key");
+        }
+
+        if(!array_key_exists('high',$tempArr)) {
+            throw new \InvalidArgumentException("Options must contain high key");
+        }
+
+        if(!is_integer($tempArr['low'])) {
+            throw new \InvalidArgumentException("Options[low] must contain an integer");
+        }
+
+        if(!is_integer($tempArr['high'])) {
+            throw new \InvalidArgumentException("Options[high] must contain an integer");
+        }
+    }
+
+    /**
+     * @param array $arr
+     * @throws \InvalidArgumentException
+     */
+    private static function checkGreatherErrors(array $arr) {
+        if(!array_key_exists('options',$arr)) {
+            throw new \InvalidArgumentException("Array must contain options key");
+        }
+
+        $tempArr = $arr['options'];
+
+        if(!is_array($tempArr)) {
+            throw new \InvalidArgumentException("Options must contain an array");
+        }
+
+        if(!array_key_exists('number',$tempArr)) {
+            throw new \InvalidArgumentException("number must contain low key");
+        }
+
+        if(!is_integer($tempArr['number'])) {
+            throw new \InvalidArgumentException("Options[number] must contain an integer");
         }
     }
 } 

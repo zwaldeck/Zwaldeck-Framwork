@@ -69,12 +69,12 @@ class IndexController extends Controller {
            'type' => Validators::Required,
            'field' => $text->getName(),
         ));
-        $text->addValidator("number", array(
-           'type' => Validators::Email,
+        $text->addValidator("greather", array(
+           'type' => Validators::Greather,
            'field' => $text->getName(),
            'options' => array(
-                'min' => 3,
-                'max' => 20,
+                'number' => 5,
+                'high' => 20,
            ),
         ));
 

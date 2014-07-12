@@ -14,4 +14,6 @@ class Validators {
     const StringLen = "stringlen";
     const Number = "number";
     const Email = "email";
+    const Between = "between";
+    const Greather = "greatherthan";
 } 
