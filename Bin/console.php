@@ -110,8 +110,8 @@ class Console {
 		$controllerName = ucfirst(strtolower($controllerName)).'Controller';
 		$fHandle = fopen('Application'.$ds.'Controllers'.$ds.$controllerName.'.php', 'w');
 		$data = "<?php
-namespace Application\Controllers;
-use Zwaldeck\Controller\Controller;
+namespace Application\\Controllers;
+use Zwaldeck\\Controller\\Controller;
 				
 class {$controllerName} extends Controller 
 				
@@ -146,7 +146,7 @@ class {$controllerName} extends Controller
 		$modelName = ucfirst(strtolower($modelName));
 		$fHandle = fopen('Application'.$ds.'Models'.$ds.$modelName.'.php', 'w');
 		$data = "<?php
-namespace Application\Models;
+namespace Application\\Models;
 		
 class {$modelName}
 
