@@ -49,6 +49,12 @@ class Console {
 			case "model":
 				$this->createModel();
 				break;
+            case "db":
+                $this->createDb();
+                break;
+            case "acl":
+                $this->createAcl();
+                break;
 			default:
 				throw new Exception("Cannot find command {$this->create} {$this->createType}");
 		}
@@ -155,6 +161,71 @@ class {$modelName}
 		fwrite($fHandle, $data);
 		fclose($fHandle);
 	}
+
+    private function createDb() {
+
+        echo "\033[1;31mWarning this will override if the database exists.\n";
+        $line = readline("Do you want to continue [Y/N]\033[0m");
+        while($line !='y' && $line != 'n') {
+            echo "\033[1;31mWarning this will override if the database exists.\n";
+            $line = readline("Do you want to continue [Y/N]\033[0m");
+        }
+
+        if(strtolower($line) == 'n') {
+            echo "\nDid nothing\n";
+            exit;
+        }
+
+        $host = readline("\033[32mHost: \033[0m");
+        $user = readline("\033[32mDatabase user: \033[0m");
+        $pass = readline("\033[32mDatabase user password: \033[0m");
+        $dbname = readline("\033[32mDatabase name: \033[0m");
+
+        if (!defined('PDO::ATTR_DRIVER_NAME')) {
+            die ("\033[31mPDO unavailable\033[0m");
+        }
+
+        try {
+            $dbh = new PDO("mysql:host=$host", $user, $pass);
+            echo "\n\nDropping database\n";
+            $dbh->exec("DROP DATABASE IF EXISTS `$dbname`;");
+
+            echo "\n\nCreating database\n";
+            $dbh->exec("CREATE DATABASE `$dbname`;
+                CREATE USER '$user'@'localhost' IDENTIFIED BY '$pass';
+                GRANT ALL ON `$dbname`.* TO '$user'@'localhost';
+                FLUSH PRIVILEGES;")
+            or die(print_r($dbh->errorInfo(), true));
+
+            echo "\nDatabase Created\n\n";
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    private function createAcl() {
+        $host = readline("\033[32mHost: \033[0m");
+        $user = readline("\033[32mDatabase user: \033[0m");
+        $pass = readline("\033[32mDatabase user password: \033[0m");
+        $dbname = readline("\033[32mDatabase name: \033[0m");
+
+        try {
+            $db = new PDO("mysql:dbname={$dbname};host={$host}", $user, $pass);
+            $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );//Error Handling
+            $sql ="CREATE table users_role(
+                     id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+                     user_id VARCHAR( 50 ) NOT NULL,
+                     role VARCHAR( 250 ) NOT NULL);" ;
+            $db->exec($sql);
+
+            print("Created users_role Table.\n");
+
+        } catch(PDOException $e) {
+            echo $e->getMessage();//Remove in production code
+        }
+    }
+
+
 }
 
 //the entry point
