@@ -148,26 +148,32 @@ class Bootstrap
     private function checkPermissions() {
         $config = require_once(ROOT . DS . 'Config/ACLConfig.php');
 
+        $config = array_unique($config);
+
         if(!empty($config)) {
             if(!array_key_exists('roles',$config)) {
-                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+                throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
             if(!is_array($config['roles'])) {
-                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+                throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
+            }
+
+            if(!in_array('anonymous', $config['roles'])) {
+                throw new ConfigErrorException("Config array 'ACLConfig' --> 'roles' must contain a value 'anonymous'");
             }
 
             if(!array_key_exists('routes',$config)) {
-                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+                throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
             if(!is_array($config['routes'])) {
-                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+                throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
             foreach($config['routes'] as $route) {
                 if(!is_array($route)) {
-                    throw new ConfigErrorException("in config array 'ACLConfig must all routes be arrays");
+                    throw new ConfigErrorException("in config array 'ACLConfig' must all routes be arrays");
                 }
             }
         }
