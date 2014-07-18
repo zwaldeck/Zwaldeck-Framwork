@@ -7,3 +7,4 @@
 	RewriteRule	^(.*)$	index.php?url=$1	[PT,L]
 	
 </IfModule>
+SetEnv APPLICATION_ENV development

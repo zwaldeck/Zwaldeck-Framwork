@@ -1,14 +1,16 @@
 <?php
-$time = microtime();
-$time = explode(' ', $time);
-$time = $time[1] + $time[0];
-$start = $time;
-
-session_start();
-
+define('ENV', getenv('APPLICATION_ENV'));
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
-define('ENV', getenv('APPLICATION_ENV'));
+
+if (strtolower(ENV) == "development") {
+    $time = microtime();
+    $time = explode(' ', $time);
+    $time = $time[1] + $time[0];
+    $start = $time;
+}
+
+session_start();
 
 if (strtolower(ENV) == "development") {
     error_reporting(E_ALL);
@@ -40,9 +42,13 @@ function showError($e)
 }
 
 
-$time = microtime();
-$time = explode(' ', $time);
-$time = $time[1] + $time[0];
-$finish = $time;
-$total_time = round(($finish - $start), 4);
-echo 'Page generated in ' . $total_time . ' seconds.';
+if (strtolower(ENV) == "development") {
+    $time = microtime();
+    $time = explode(' ', $time);
+    $time = $time[1] + $time[0];
+    $finish = $time;
+    $total_time = round(($finish - $start), 4);
+
+
+    echo 'Page generated in ' . $total_time . ' seconds.';
+}

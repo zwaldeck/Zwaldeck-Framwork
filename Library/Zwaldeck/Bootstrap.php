@@ -1,8 +1,10 @@
 <?php
 namespace Zwaldeck;
 
+use Zwaldeck\ACL\ACL;
 use Zwaldeck\Exception\ConfigErrorException;
 use Zwaldeck\Registry\Registry;
+use Zwaldeck\Session\SessionRegistry;
 use Zwaldeck\Util\Constants;
 use Zwaldeck\Db\Adapter\PdoAdapter;
 use Zwaldeck\Db\Adapter\MysqliAdapter;
@@ -50,6 +52,8 @@ class Bootstrap
         $router = new Router ($url, $layout, $response, $request);
         Registry::put('route', $router);
 
+        //TODO remove code below
+        $this->testACL();
     }
 
     /**
@@ -68,7 +72,7 @@ class Bootstrap
             $path .= DS . $value;
         }
         if (!file_exists($path . '.php')) {
-            throw new Exception ("Could not load class {$className}");
+            throw new \Exception ("Could not load class {$className}");
         } else {
             require_once $path . '.php';
         }
@@ -130,13 +134,13 @@ class Bootstrap
      * @param $errline
      * @throws \ErrorException
      */
-    private static function exception_error_handler($errno, $errstr, $errfile, $errline)
+    public static function exception_error_handler($errno, $errstr, $errfile, $errline)
     {
         throw new \ErrorException ($errstr, 0, $errno, $errfile, $errline);
     }
 
 
-    private static function fatal_error_handler()
+    public static function fatal_error_handler()
     {
         $last_error = error_get_last();
         if ($last_error ['type'] === E_ERROR) {
@@ -148,7 +152,7 @@ class Bootstrap
     private function checkPermissions() {
         $config = require_once(ROOT . DS . 'Config/ACLConfig.php');
 
-        $config = array_unique($config);
+        $config['roles'] = array_unique($config['roles']);
 
         if(!empty($config)) {
             if(!array_key_exists('roles',$config)) {
@@ -176,7 +180,16 @@ class Bootstrap
                     throw new ConfigErrorException("in config array 'ACLConfig' must all routes be arrays");
                 }
             }
+
+            Registry::set('ACLConfig', $config);
+            $_SESSION['current_role'] = 'anonymous';
         }
+    }
+
+    private function testACL() {
+        $acl = new ACL();
+
+        var_dump($acl->getUsersFromRole(Registry::get('dbAdapter'), 'user'));
     }
 }
 

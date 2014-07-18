@@ -18,6 +18,10 @@ class SessionRegistry {
 			throw new \InvalidArgumentException("\$key must be valid");
 		}
 
+        if(strtolower($key) == 'current_role') {
+            throw new \InvalidArgumentException('$key may not be current_role');
+        }
+
 		$var = serialize($var);
 		
 		$_SESSION[$key] = $var;
