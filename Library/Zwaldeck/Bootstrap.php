@@ -1,6 +1,7 @@
 <?php
 namespace Zwaldeck;
 
+use Zwaldeck\Exception\ConfigErrorException;
 use Zwaldeck\Registry\Registry;
 use Zwaldeck\Util\Constants;
 use Zwaldeck\Db\Adapter\PdoAdapter;
@@ -24,7 +25,9 @@ class Bootstrap
         set_error_handler('Zwaldeck\Bootstrap::exception_error_handler');
         register_shutdown_function('Zwaldeck\Bootstrap::fatal_error_handler');
 
-        $config = require_once(ROOT . DS . 'Config/config.php');
+        $config = require_once(ROOT . DS . 'Config/Config.php');
+
+        $this->checkPermissions();//check permissions is valid
 
         Registry::put('config', $config); // put config in registery
 
@@ -132,12 +135,41 @@ class Bootstrap
         throw new \ErrorException ($errstr, 0, $errno, $errfile, $errline);
     }
 
+
     private static function fatal_error_handler()
     {
         $last_error = error_get_last();
         if ($last_error ['type'] === E_ERROR) {
             // fatal error
             exception_error_handler(E_ERROR, $last_error ['message'], $last_error ['file'], $last_error ['line']);
+        }
+    }
+
+    private function checkPermissions() {
+        $config = require_once(ROOT . DS . 'Config/ACLConfig.php');
+
+        if(!empty($config)) {
+            if(!array_key_exists('roles',$config)) {
+                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+            }
+
+            if(!is_array($config['roles'])) {
+                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+            }
+
+            if(!array_key_exists('routes',$config)) {
+                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+            }
+
+            if(!is_array($config['routes'])) {
+                throw new ConfigErrorException("Config array 'ACLConfig must contain an array 'roles'");
+            }
+
+            foreach($config['routes'] as $route) {
+                if(!is_array($route)) {
+                    throw new ConfigErrorException("in config array 'ACLConfig must all routes be arrays");
+                }
+            }
         }
     }
 }

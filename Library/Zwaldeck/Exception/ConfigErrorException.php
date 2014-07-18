@@ -1,18 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: wout
+ * Date: 7/18/14
+ * Time: 2:03 PM
+ */
 
 namespace Zwaldeck\Exception;
 
-/**
- * Class ElementNotFoundException
- * @package Zwaldeck\Exception
- * @author wout schoovaerts
- */
-class ElementNotFoundException extends \Exception {
+
+class ConfigErrorException extends \Exception {
 
     /**
-     *
      * @param string $message
-     * @param int|number $code
+     * @param int $code
      * @param \Exception $previous
      */
     public function __construct($message, $code = 0,\Exception $previous = null) {
@@ -21,4 +22,5 @@ class ElementNotFoundException extends \Exception {
     public function __toString() {
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
-}
+
+} 
