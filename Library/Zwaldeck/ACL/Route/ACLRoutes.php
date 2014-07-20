@@ -27,7 +27,7 @@ class ACLRoutes implements SingletonInterface {
     private function __construct() {
         $routes = Registry::get('ACLConfig')['routes'];
 
-        foreach($route as $route) {
+        foreach($routes as $route) {
 
         }
     }

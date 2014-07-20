@@ -68,7 +68,7 @@ class ACL {
     }
 
     public function getRoleFromUri($uri) {
-        throw new NotImplementedYet();
+
     }
 
 } 

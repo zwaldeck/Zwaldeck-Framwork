@@ -1,6 +1,7 @@
 <?php
 
 namespace Zwaldeck\Http;
+use Zwaldeck\Registry\FrameworkRegistry;
 
 /**
  * The response object
@@ -121,6 +122,13 @@ class Response {
 	 * @var string
 	 */
 	protected $_encoding = "UTF-8";
+
+    /**
+     * The current URI
+     *
+     * @var string
+     */
+    protected $_currentURI = "index";
 	
 	/**
 	 * @param string $body
@@ -133,6 +141,12 @@ class Response {
 		$this->statusCode = $status;
 		$this->headers = $headers;
 		$this->cookies = $cookies;
+
+        $this->_currentURI = ltrim($_SERVER['PHP_SELF'], '/app.php');
+
+        if($this->_currentURI == "") {
+            $this->_currentURI = "index";
+        }
 	}
 	
 	
@@ -344,5 +358,9 @@ class Response {
 		
 		$this->sendBody();
 	}
+
+    public function getCurrentURI() {
+        return $this->_currentURI;
+    }
 }
 ?>

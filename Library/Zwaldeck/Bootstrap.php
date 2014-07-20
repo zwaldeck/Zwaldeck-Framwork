@@ -3,6 +3,7 @@ namespace Zwaldeck;
 
 use Zwaldeck\ACL\ACL;
 use Zwaldeck\Exception\ConfigErrorException;
+use Zwaldeck\Registry\FrameworkRegistry;
 use Zwaldeck\Registry\Registry;
 use Zwaldeck\Session\SessionRegistry;
 use Zwaldeck\Util\Constants;
@@ -54,11 +55,13 @@ class Bootstrap
 
         //TODO remove code below
         $this->testACL();
+
+
     }
 
     /**
      * @param $className
-     * @throws Exception
+     * @throws \Exception
      */
     private static function autoLoad($className)
     {

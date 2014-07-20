@@ -25,6 +25,8 @@ class ACLRoute {
         if(!is_string($route) || trim($route) == "") {
             throw new \InvalidArgumentException('$route must be a string and may not be empty');
         }
+
+        $this->uri = $route;
     }
 
 } 
