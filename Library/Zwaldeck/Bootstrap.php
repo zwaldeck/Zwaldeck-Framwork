@@ -2,10 +2,10 @@
 namespace Zwaldeck;
 
 use Zwaldeck\ACL\ACL;
+use Zwaldeck\ACL\Route\ACLRoutes;
+
 use Zwaldeck\Exception\ConfigErrorException;
-use Zwaldeck\Registry\FrameworkRegistry;
 use Zwaldeck\Registry\Registry;
-use Zwaldeck\Session\SessionRegistry;
 use Zwaldeck\Util\Constants;
 use Zwaldeck\Db\Adapter\PdoAdapter;
 use Zwaldeck\Db\Adapter\MysqliAdapter;
@@ -55,7 +55,6 @@ class Bootstrap
 
         //TODO remove code below
         $this->testACL();
-
 
     }
 
@@ -192,7 +191,8 @@ class Bootstrap
     private function testACL() {
         $acl = new ACL();
 
-        var_dump($acl->getUsersFromRole(Registry::get('dbAdapter'), 'user'));
+        var_dump($acl->getURIFromRouterName("user_panel"));
+
     }
 }
 

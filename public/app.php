@@ -1,5 +1,5 @@
 <?php
-define('ENV', getenv('APPLICATION_ENV'));
+define('ENV', 'development');
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 
@@ -11,7 +11,6 @@ if (strtolower(ENV) == "development") {
 }
 
 session_start();
-
 if (strtolower(ENV) == "development") {
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);

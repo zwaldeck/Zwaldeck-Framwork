@@ -2,7 +2,9 @@
 
 namespace Zwaldeck\ACL;
 
+use Zwaldeck\ACL\Role\ACLRole;
 use Zwaldeck\ACL\Role\ACLRoles;
+use Zwaldeck\ACL\Route\ACLRoutes;
 use Zwaldeck\Db\Adapter\AbstractAdapter;
 use Zwaldeck\Db\Helpers\Select;
 use Zwaldeck\Exception\NotImplementedYet;
@@ -67,8 +69,64 @@ class ACL {
         return $return;
     }
 
+    /**
+     * @param string $uri
+     * @throws \InvalidArgumentException
+     * @return ACLRole
+     */
     public function getRoleFromUri($uri) {
+        $routes = ACLRoutes::getInstance()->getRoutes();
+        foreach($routes as $route) {
+            $ACLRouteURI = $route->getURI();
 
+            if(strtolower($ACLRouteURI) == strtolower($uri)) {
+                return $route->getRole();
+            }
+        }
+
+        throw new \InvalidArgumentException("No role found for route {$uri}");
     }
 
-} 
+    /**
+     * @param $role_name
+     * @return array
+     */
+    public function getURIsFromRole($role_name) {
+        $routes = ACLRoutes::getInstance()->getRoutes();
+
+        $matching = array();
+
+        foreach($routes as $route) {
+            $ACLRole = ACLRoles::getInstance()->getRole($role_name);
+            if($route->getRole()->getName() == $ACLRole->getName()) {
+                $matching[] = $route->getURI();
+            }
+        }
+
+        return $matching;
+    }
+
+    /**
+     * @param $route_name
+     * @return ACLRole|null
+     */
+    public function getRoleFromRouteName($route_name) {
+        if(array_key_exists($route_name, ACLRoutes::getInstance()->getRoutes()))  {
+            return ACLRoutes::getInstance()->getRoutes()[$route_name]->getRole();
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $route_name
+     * @return string
+     */
+    public function getURIFromRouterName($route_name) {
+        if(array_key_exists($route_name, ACLRoutes::getInstance()->getRoutes()))  {
+            return ACLRoutes::getInstance()->getRoutes()[$route_name]->getURI();
+        }
+
+        return "";
+    }
+}
