@@ -4,6 +4,7 @@ namespace Zwaldeck\ACL;
 
 use Zwaldeck\ACL\Role\ACLRole;
 use Zwaldeck\ACL\Role\ACLRoles;
+use Zwaldeck\ACL\Route\ACLRoute;
 use Zwaldeck\ACL\Route\ACLRoutes;
 use Zwaldeck\Db\Adapter\AbstractAdapter;
 use Zwaldeck\Db\Helpers\Select;
@@ -21,9 +22,12 @@ class ACL {
     /** @var \Zwaldeck\ACL\Role\ACLRoles  */
     private $roles;
 
+    private $redirectURL;
+
 
     public function __construct() {
         $this->roles = ACLRoles::getInstance();
+        $this->redirectURL = Registry::get('ACLConfig')['login_uri'];
     }
 
     /**
@@ -78,15 +82,22 @@ class ACL {
      */
     public function getRoleFromUri($uri) {
         $routes = ACLRoutes::getInstance()->getRoutes();
+        /** @var $route ACLRoute */
         foreach($routes as $route) {
             $ACLRouteURI = $route->getURI();
 
+            if($route->hasWildCard()) {
+                $ACLRouteURI = trim($ACLRouteURI, '*');
+
+            }
+            $ACLRouteURI = rtrim($ACLRouteURI,'/');
             if(strtolower($ACLRouteURI) == strtolower($uri)) {
                 return $route->getRole();
             }
+
         }
 
-        throw new \InvalidArgumentException("No role found for route {$uri}");
+        return ACLRoles::getInstance()->getRole('anonymous');
     }
 
     /**
@@ -132,20 +143,55 @@ class ACL {
         return "";
     }
 
+    /**
+     * @return string
+     */
+    public function getRedirectURL() {
+        return $this->redirectURL;
+    }
+
+    /**
+     * @param ACLRole $role
+     */
     public function setRole(ACLRole $role) {
         $_SESSION['current_role'] = $role->getName();
     }
 
-    public function setRoleForUser(AbstractAdapter $db, $user) {
-
+    /**
+     * @param AbstractAdapter $db
+     * @param integer $userid
+     */
+    public function setRoleForUser(AbstractAdapter $db, $userid) {
+        $this->setRole($this->getRoleFromUser($db, $userid));
     }
 
+    /**
+     * @return bool
+     */
     public function doesUserHasAccess() {
         return $this->hasAccess(FrameworkRegistry::get('response')->getCurrentURI(), $_SESSION['current_role']);
     }
 
+    /**
+     * @param AbstractAdapter $db
+     * @param $user_id
+     * @param ACLRole $role
+     */
+    public function addUser(AbstractAdapter $db, $user_id, ACLRole $role) {
+        $db->insert('users_roles', array(
+           'user_id' => $user_id,
+           'role' => $role->getName()
+        ));
+    }
+
+    /**
+     * @param string $uri
+     * @param string $currentRoleName
+     * @return bool
+     */
     private function hasAccess($uri, $currentRoleName) {
-        var_dump($uri);
         $neededRole = $this->getRoleFromUri($uri);
+
+        return strtolower($neededRole->getName()) == strtolower($currentRoleName);
     }
 }

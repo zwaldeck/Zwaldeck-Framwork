@@ -2,8 +2,10 @@
 
 namespace Zwaldeck\Controller;
 
+use Zwaldeck\ACL\ACL;
 use Zwaldeck\Http\Request;
 use Zwaldeck\Http\Response;
+use Zwaldeck\Registry\Registry;
 use Zwaldeck\View\View;
 
 /**
@@ -60,6 +62,10 @@ class Controller {
 	public function __construct(array $layout, $controllerName, $actionName, Response $response, Request $request) {
 		if(!is_array($layout) || !is_string($controllerName) || trim($controllerName) == '' || !is_string($actionName) || trim($actionName) == '' || is_null($request) || is_null($response))
 			throw new \InvalidArgumentException('One of the arguments is wrong ');
+
+        if (array_key_exists('acl_enabled', Registry::get('config')) && Registry::get('config')['acl_enabled']) {
+            $this->checkAccess();
+        }
 		
 		$this->_layout = $layout;
 		$this->_controller = $controllerName;
@@ -69,7 +75,7 @@ class Controller {
 		$this->_request = $request;
 		
 		$this->_view = new View($this->_layout, $this->_controller, $this->_action);
-		
+
 	}
 	
 	/**
@@ -119,6 +125,20 @@ class Controller {
 	public function get($key) {
 		return $this->_view->get($key);
 	}
+
+    public function redirect($uri) {
+        header('Location: '.$uri);
+        die;
+    }
+
+    private function checkAccess() {
+        /** @var ACL $acl */
+        $acl = Registry::get('ACL');
+
+        if(!$acl->doesUserHasAccess()) {
+            $this->redirect($acl->getRedirectURL());
+        }
+    }
 }
 
 ?>

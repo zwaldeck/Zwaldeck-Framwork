@@ -129,23 +129,32 @@ class Response {
      * @var string
      */
     protected $_currentURI = "index";
-	
-	/**
-	 * @param string $body
-	 * @param number $status
-	 * @param array $headers
-	 * @param array $cookies
-	 */
+
+    /**
+     * the host
+     *
+     * @var string
+     */
+    protected $_host;
+
+    /**
+     * @param string $body
+     * @param int|number $status
+     * @param array $headers
+     * @param array $cookies
+     */
 	public function __construct($body = '', $status = 200, array $headers = array(), array $cookies = array()) {
 		$this->body = $body;
 		$this->statusCode = $status;
 		$this->headers = $headers;
 		$this->cookies = $cookies;
 
-        $this->_currentURI = '/'.ltrim($_SERVER['PHP_SELF'], '/app.php');
+        $this->_host = $_SERVER['HTTP_HOST'];
 
-        if($this->_currentURI == "/") {
-            $this->_currentURI = "/index";
+        $this->_currentURI = ltrim($_SERVER['PHP_SELF'], '/app.php');
+
+        if($this->_currentURI == "") {
+            $this->_currentURI = "index";
         }
 	}
 	
@@ -359,8 +368,18 @@ class Response {
 		$this->sendBody();
 	}
 
+    /**
+     * @return string
+     */
     public function getCurrentURI() {
         return $this->_currentURI;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHost() {
+        return $this->_host;
     }
 }
 ?>

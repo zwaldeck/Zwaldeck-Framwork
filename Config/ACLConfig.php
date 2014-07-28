@@ -13,6 +13,7 @@ return array(
         'admin_panel' => array(
             'uri' => 'admin/*',
             'role' => 'admin'
-        )
-    )
+        ),
+    ),
+    'login_uri' => 'login',
 );

@@ -29,7 +29,9 @@ class Bootstrap
 
         $config = require_once(ROOT . DS . 'Config/Config.php');
 
-        $this->checkPermissions();//check permissions is valid
+        if (array_key_exists('acl_enabled', $config) && $config['acl_enabled']) {
+            $this->checkPermissions(); //check permissions is valid
+        }
 
         Registry::put('config', $config); // put config in registery
 
@@ -49,12 +51,11 @@ class Bootstrap
         $request = new Request ($_SERVER ['REQUEST_METHOD'], $url, $_SERVER, file_get_contents('php://input'));
         $response = new Response ();
 
-        $router = new Router ($url, $layout, $response, $request);
-        Registry::put('route', $router);
         FrameworkRegistry::put('response', $response); //don't change this is used internally
 
-        //TODO remove code below
-        $this->testACL();
+        $router = new Router ($url, $layout, $response, $request);
+        Registry::put('route', $router);
+
 
     }
 
@@ -152,48 +153,54 @@ class Bootstrap
         }
     }
 
-    private function checkPermissions() {
+    private function checkPermissions()
+    {
         $config = require_once(ROOT . DS . 'Config/ACLConfig.php');
 
         $config['roles'] = array_unique($config['roles']);
 
-        if(!empty($config)) {
-            if(!array_key_exists('roles',$config)) {
+        if (!empty($config)) {
+            if (!array_key_exists('roles', $config)) {
                 throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
-            if(!is_array($config['roles'])) {
+            if (!is_array($config['roles'])) {
                 throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
-            if(!in_array('anonymous', $config['roles'])) {
+            if (!in_array('anonymous', $config['roles'])) {
                 throw new ConfigErrorException("Config array 'ACLConfig' --> 'roles' must contain a value 'anonymous'");
             }
 
-            if(!array_key_exists('routes',$config)) {
+            if (!array_key_exists('routes', $config)) {
                 throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
-            if(!is_array($config['routes'])) {
+            if (!is_array($config['routes'])) {
                 throw new ConfigErrorException("Config array 'ACLConfig' must contain an array 'roles'");
             }
 
-            foreach($config['routes'] as $route) {
-                if(!is_array($route)) {
+            foreach ($config['routes'] as $route) {
+                if (!is_array($route)) {
                     throw new ConfigErrorException("in config array 'ACLConfig' must all routes be arrays");
                 }
             }
 
+            if (!array_key_exists('login_uri', $config)) {
+                throw new ConfigErrorException("Config array 'ACLConfig' must contain a element 'login_uri'");
+            }
+
+            $roles = $config['roles'];
+            foreach ($config['routes'] as $route) {
+                if (!in_array($route['role'], $roles)) {
+                    throw new ConfigErrorException('Role "' . $route['role'] . '" is not in the array roles');
+                }
+            }
+
             Registry::set('ACLConfig', $config);
+            Registry::set('ACL', new ACL());
             $_SESSION['current_role'] = 'anonymous';
         }
-    }
-
-    private function testACL() {
-        $acl = new ACL();
-
-        $acl->doesUserHasAccess();
-
     }
 }
 

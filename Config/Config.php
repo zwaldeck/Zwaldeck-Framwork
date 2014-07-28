@@ -2,8 +2,9 @@
 return array(
 	'defaultController' => 'index',
 	'defaultAction' => 'index',
+    'acl_enabled' => true, //the default is false
 	'db' => array(
-		'type' => 'pdo', //pdo of mysqli
+		'type' => 'pdo', //pdo or mysqli
 		'host' => 'localhost',
 		'user' => 'root',
 		'password' => 'root',
