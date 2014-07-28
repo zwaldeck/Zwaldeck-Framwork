@@ -2,8 +2,6 @@
 namespace Zwaldeck;
 
 use Zwaldeck\ACL\ACL;
-use Zwaldeck\ACL\Route\ACLRoutes;
-
 use Zwaldeck\Exception\ConfigErrorException;
 use Zwaldeck\Registry\FrameworkRegistry;
 use Zwaldeck\Registry\Registry;
