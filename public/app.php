@@ -33,11 +33,15 @@ try {
 }
 
 
-function showError($e)
+function showError(Exception $e)
 {
     echo "<h3>Line: {$e->getLine()}</h3>";
     echo "<h3>File: {$e->getFile()}</h3>";
     echo "<h2>Error: {$e->getMessage()}</h2>";
+    if(strtolower(ENV) == "development") {
+        echo "<h2>StackTrace</h2>";
+        var_dump($e->getTrace());
+    }
 }
 
 
@@ -50,4 +54,7 @@ if (strtolower(ENV) == "development") {
 
 
     echo 'Page generated in ' . $total_time . ' seconds.';
+    echo '<h5>Memory usage</h5><ul>';
+    echo '<li>'.number_format(memory_get_usage(true) / 1048576, 2) . ' MB'.'</li>';
+    echo '</ul>';
 }
