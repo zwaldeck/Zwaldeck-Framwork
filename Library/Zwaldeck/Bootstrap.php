@@ -5,6 +5,7 @@ use Zwaldeck\ACL\ACL;
 use Zwaldeck\ACL\Route\ACLRoutes;
 
 use Zwaldeck\Exception\ConfigErrorException;
+use Zwaldeck\Registry\FrameworkRegistry;
 use Zwaldeck\Registry\Registry;
 use Zwaldeck\Util\Constants;
 use Zwaldeck\Db\Adapter\PdoAdapter;
@@ -52,6 +53,7 @@ class Bootstrap
 
         $router = new Router ($url, $layout, $response, $request);
         Registry::put('route', $router);
+        FrameworkRegistry::put('response', $response); //don't change this is used internally
 
         //TODO remove code below
         $this->testACL();
@@ -127,6 +129,7 @@ class Bootstrap
         }
 
         Registry::set('dbAdapter', $dbAdapter);
+        FrameworkRegistry::get('dbAdapter', $dbAdapter); //don't change this is used internally
     }
 
     /**
@@ -191,7 +194,7 @@ class Bootstrap
     private function testACL() {
         $acl = new ACL();
 
-        var_dump($acl->getURIFromRouterName("user_panel"));
+        $acl->doesUserHasAccess();
 
     }
 }

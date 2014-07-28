@@ -142,10 +142,10 @@ class Response {
 		$this->headers = $headers;
 		$this->cookies = $cookies;
 
-        $this->_currentURI = ltrim($_SERVER['PHP_SELF'], '/app.php');
+        $this->_currentURI = '/'.ltrim($_SERVER['PHP_SELF'], '/app.php');
 
-        if($this->_currentURI == "") {
-            $this->_currentURI = "index";
+        if($this->_currentURI == "/") {
+            $this->_currentURI = "/index";
         }
 	}
 	

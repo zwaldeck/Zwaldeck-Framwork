@@ -8,6 +8,8 @@ use Zwaldeck\ACL\Route\ACLRoutes;
 use Zwaldeck\Db\Adapter\AbstractAdapter;
 use Zwaldeck\Db\Helpers\Select;
 use Zwaldeck\Exception\NotImplementedYet;
+use Zwaldeck\Registry\FrameworkRegistry;
+use Zwaldeck\Registry\Registry;
 
 /**
  * Class ACL
@@ -128,5 +130,22 @@ class ACL {
         }
 
         return "";
+    }
+
+    public function setRole(ACLRole $role) {
+        $_SESSION['current_role'] = $role->getName();
+    }
+
+    public function setRoleForUser(AbstractAdapter $db, $user) {
+
+    }
+
+    public function doesUserHasAccess() {
+        return $this->hasAccess(FrameworkRegistry::get('response')->getCurrentURI(), $_SESSION['current_role']);
+    }
+
+    private function hasAccess($uri, $currentRoleName) {
+        var_dump($uri);
+        $neededRole = $this->getRoleFromUri($uri);
     }
 }

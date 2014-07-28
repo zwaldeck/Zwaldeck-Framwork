@@ -30,7 +30,7 @@ use Zwaldeck\Util\Utils;
 class IndexController extends Controller {
 	
 	public function indexAction() {
-		$this->set('title', 'Zwaldeck loves you');
+		$this->set('title', 'Welcome, this is Zwaldeck Framework');
 
 
 		

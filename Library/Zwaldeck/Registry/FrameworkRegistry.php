@@ -10,7 +10,7 @@ class FrameworkRegistry extends Registry {
     {
         $stacktrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 1)[0];
 
-        if(!isset($stacktrace["file"]) || (strpos($stacktrace['file'], 'zwaldeck') == false)) {
+        if(!isset($stacktrace["file"]) || (strpos(strtolower($stacktrace['file']), 'zwaldeck') == false)) {
             throw new \Exception("FrameworkRegistery should only be use internally");
         }
 
@@ -35,7 +35,7 @@ class FrameworkRegistry extends Registry {
     {
         $stacktrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 1)[0];
 
-        if(!isset($stacktrace["file"]) || (strpos($stacktrace['file'], 'zwaldeck') == false)) {
+        if(!isset($stacktrace["file"]) || (strpos(strtolower($stacktrace['file']), 'zwaldeck') == false)) {
             throw new \Exception("FrameworkRegistery should only be use internally");
         }
 
