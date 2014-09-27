@@ -2,6 +2,7 @@
 namespace Zwaldeck;
 
 use Zwaldeck\ACL\ACL;
+use Zwaldeck\AnnotationEngine\AnnotationEngine;
 use Zwaldeck\Exception\ConfigErrorException;
 use Zwaldeck\Registry\FrameworkRegistry;
 use Zwaldeck\Registry\Registry;
@@ -19,8 +20,6 @@ use Zwaldeck\Router\Router;
  */
 class Bootstrap
 {
-
-
     public function __construct()
     {
         spl_autoload_register('Zwaldeck\Bootstrap::autoload');
@@ -46,6 +45,9 @@ class Bootstrap
 
         $this->initDbAdapter($config ['db']);
 
+        //tmp code
+        new AnnotationEngine(new TmpClass());
+
         $layout = file_exists(ROOT . DS . 'Application/Views/layout.php') ? require(ROOT . DS . 'Application/Views/layout.php') : null;
 
         $request = new Request ($_SERVER ['REQUEST_METHOD'], $url, $_SERVER, file_get_contents('php://input'));
@@ -55,6 +57,7 @@ class Bootstrap
 
         $router = new Router ($url, $layout, $response, $request);
         Registry::put('route', $router);
+
 
 
     }

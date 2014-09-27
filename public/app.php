@@ -21,7 +21,8 @@ use Zwaldeck\Exception\Exception404;
 
 try {
     require_once(ROOT . DS . 'Library/Zwaldeck/Bootstrap.php');
-    new Zwaldeck\Bootstrap();
+    $bs = new Zwaldeck\Bootstrap();
+
 } catch (InvalidArgumentException $e) {
     showError($e);
 } catch (Exception404 $e) {
