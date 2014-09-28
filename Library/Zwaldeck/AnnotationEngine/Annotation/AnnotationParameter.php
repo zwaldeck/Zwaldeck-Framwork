@@ -1,16 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wout
- * Date: 27.09.14
- * Time: 14:35
- */
 
 namespace Zwaldeck\AnnotationEngine\Annotation;
 
 
 use Zwaldeck\AnnotationEngine\Exceptions\AnnotationException;
 
+/**
+ * Class AnnotationParameter
+ * @package Zwaldeck\AnnotationEngine\Annotation
+ * @author Wout Schoovaerts
+ */
 class AnnotationParameter {
 
     /**

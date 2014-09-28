@@ -13,6 +13,11 @@ use Zwaldeck\AnnotationEngine\Annotation\Annotation;
 use Zwaldeck\AnnotationEngine\AnnotationAble;
 use Zwaldeck\AnnotationEngine\Exceptions\MethodAnnotationsException;
 
+/**
+ * Class MethodAnnotations
+ * @package Zwaldeck\AnnotationEngine\Method
+ * @author Wout Schoovaerts
+ */
 class MethodAnnotations implements AnnotationAble {
 
     /**
@@ -89,6 +94,9 @@ class MethodAnnotations implements AnnotationAble {
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getName() {
         return $this->name;
     }
@@ -114,6 +122,5 @@ class MethodAnnotations implements AnnotationAble {
             $name = $annotation->getName();
             $this->annotations[$name] = $annotation;
         }
-        //var_dump($this->annotations);
     }
 } 

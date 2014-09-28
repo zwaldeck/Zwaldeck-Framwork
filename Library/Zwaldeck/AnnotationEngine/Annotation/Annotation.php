@@ -1,16 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wout
- * Date: 27.09.14
- * Time: 14:32
- */
 
 namespace Zwaldeck\AnnotationEngine\Annotation;
 
 
 use Zwaldeck\AnnotationEngine\Exceptions\AnnotationException;
 
+/**
+ * Class Annotation
+ * @package Zwaldeck\AnnotationEngine\Annotation
+ * @author Wout Schoovaerts
+ */
 class Annotation {
 
     /**
@@ -57,7 +56,10 @@ class Annotation {
         }
     }
 
+    /**
+     * @return string
+     */
     public function getName(){
-        return rand(0,9999999);
+        return $this->name;
     }
 } 
